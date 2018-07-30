@@ -222,3 +222,7 @@ config.py
 *.env
 *.ENV
 *config.py
+
+# Environment
+myprojectenv/
+myprojectenv/
