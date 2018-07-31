@@ -11,7 +11,7 @@ def createdb(dbfilename='data.db'):
             Id INTEGER PRIMARY KEY AUTOINCREMENT, 
             API_key text,
             date_time text,
-            channel integer,
+            mac text,
             field integer,
             data real
             )""")
