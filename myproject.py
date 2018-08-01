@@ -40,6 +40,28 @@ def show_recent():
     time_stamp = t_pst.strftime('%I:%M:%S %p Time Zone: %Z   %b %d, %Y')
     return render_template("showrecent.html", data=data, time_stamp=time_stamp)
 
+@app.route("/showdoubletemp")
+def show_double_temp():
+    conn = sqlite3.connect('data.db')
+    c = conn.cursor()
+    c.execute("SELECT data, date_time, MAX(rowid) FROM data WHERE field=?",('1',))
+    row1 = c.fetchone()
+    c.execute("SELECT data, date_time, MAX(rowid) FROM data WHERE field=?", ('2',))
+    row2 = c.fetchone()
+    c.close()
+    conn.close()
+    data1 = str(round((float(row1[0]) * 1.8) + 32))
+    data2 = str(round((float(row2[0]) * 1.8) + 32))
+    time_str1 = row1[1]
+    t1 = dateutil.parser.parse(time_str1)
+    t_pst1 = t1.astimezone(pytz.timezone('US/Pacific'))
+    time_stamp1 = t_pst1.strftime('%I:%M:%S %p   %b %d, %Y')
+    time_str2 = row2[1]
+    t2 = dateutil.parser.parse(time_str2)
+    t_pst2 = t2.astimezone(pytz.timezone('US/Pacific'))
+    time_stamp2 = t_pst2.strftime('%I:%M:%S %p   %b %d, %Y')
+    return render_template("showdoubletemp.html", data1=data1, time_stamp1=time_stamp1, data2 = data2, time_stamp2=time_stamp2)
+
 @app.route("/showtemp")
 def show_temp():
     conn = sqlite3.connect('data.db')
