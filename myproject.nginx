@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name your_domain wwww.your_domain;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/home/peter/flaskapp/flaskapp.sock;
+    }
+}

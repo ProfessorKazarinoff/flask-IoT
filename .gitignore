@@ -222,6 +222,7 @@ config.py
 *.env
 *.ENV
 *config.py
+myproject/config.py
 
 # Environment
 myprojectenv/
@@ -233,6 +234,10 @@ myprojectenv/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.vscode/
 
 # database
 data.db
+myproject/data.db
+
+
